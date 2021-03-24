@@ -25,6 +25,9 @@ or just
 * Of course, UWP apps will stop working
 * Graphics control panels will stop working on **DHC** drivers, so use **WHQL** drivers
 
+## Donation
+Monero: `46FQDwvrc3uNAEGrptoMSwY3oAdmFNVnjc8jzkCTw9MG9XTstDU2JwjTADyphKhqDw9mKBjU8eaUacLErHmDqvvWFpCQW3N`
+
 ## License
 Revision's DWM Tool is licensed under GNU General Public License v3.0.
 The tool also contains [NSudo](https://github.com/M2Team/NSudo/), which is licensed under The MIT License (MIT).
