@@ -2,15 +2,15 @@
 A simple batch tool to disable/enable DWM on Windows 8.1 and 10. Feel free to contribute.
 
 ## Disclaimer
-I am not responsible for any damage resulting, use it at your own risk. 
+We/I do not take any responsibility for any damage caused through use of the tool
 
 ## Features
-* Revert script (only for 10)
+* Revert script for 8.1 and 10
 * Fixes for Explorer bugs
 * Classic UI
 
 ## Chromium & Electron apps black screen workaround
-A potential workaround would be to run browsers or programs in *Compatibility* mode for *Windows 7* and add this parameters to programs shortcut:
+A potential workaround would be to run browsers or programs in *Compatibility* mode for *Windows 7* and/or add these parameters to programs shortcut:
 
 `--disable-dwm-composition --disable-gpu-compositing`
 or just
@@ -18,15 +18,12 @@ or just
 
 ## What you should expect
 * Lock screen will be black on Windows 10, so don't use any password. If you still want to use password, you must rely on your muscle memory. Sadly, we can't do anything.
-* Download popup might be interferencing on newer Windows 10 versions (2004+)
+* Download pop-up might be interferencing on newer Windows 10 versions (2004+)
 * **Open With** may not work
-* Opening WiFi icon works fine, but it doesn't close. However, it should close after restarting **explorer.exe**
-* It may increase/decrease performance, depends on a game engine and operation system
+* Opening the Wi-Fi icon works fine, but it doesn't close, however it should close after restarting **explorer.exe**
+* Might increase/decrease performance, depends on a game engine and operating system
 * Of course, UWP apps will stop working
-* Graphics control panels will stop working on **DHC** drivers, so use **WHQL** drivers
-
-## Donation
-Monero: `46FQDwvrc3uNAEGrptoMSwY3oAdmFNVnjc8jzkCTw9MG9XTstDU2JwjTADyphKhqDw9mKBjU8eaUacLErHmDqvvWFpCQW3N`
+* Graphics control panels will stop working on **DHC** drivers, so use **WHQL** drivers instead
 
 ## License
 Revision's DWM Tool is licensed under GNU General Public License v3.0.
