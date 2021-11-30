@@ -6,12 +6,12 @@ setlocal EnabledelayedExpansion
 :: Website: https://www.revi.cc/
 :: Maintainer: Dreammjow - https://github.com/dreammjow
 :: License: GNU General Public License v3.0
-:: Version: 2.0
+:: Version: 2.1
 ::-------------------------------------------------------------------------------------------
-for /f "tokens=2 delims==" %%i in ('wmic os get BuildNumber /value ^| find "="') do set "build=%%i"
-if %build% gtr "19044" goto :Error
-for /f "tokens=4*" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ProductName"') do set os=%%i
-goto :Warning
+for /f "tokens=4*" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "ProductName"') do set "os=%%i"
+for /f "tokens=2 delims==" %%i in ('wmic os get BuildNumber /value ^| find "="') do set /a "build=%%i"
+set /a "limit=19044"
+if %build% lss %limit% (goto :Warning) else (goto :Error)
 
 :Warning
 echo.=============================================================
@@ -35,7 +35,7 @@ if errorlevel 1 goto :DisableEnable
 :DisableEnable
 cls
 echo.=============================================================
-echo.		Revision DWM Tool Menu
+echo.		Revision DWM Tool Menu - %os%
 echo.=============================================================
 echo.
 echo.	[1]   Disable DWM
@@ -52,12 +52,12 @@ if errorlevel 2 goto :EnableDWM
 if errorlevel 1 goto :DisableDWM
 
 :DisableDWM
-if "%os%"=="10" ( goto :DisableDWM10 ) else ( goto :Error)
-if "%os%"=="8.1" ( goto :DisableDWM81 ) else ( goto :Error)
+if "%os%"=="10" goto :DisableDWM10
+if "%os%"=="8.1" goto :DisableDWM81
 
 :EnableDWM
-if "%os%"=="10" ( goto :EnableDWM10 ) else ( goto :Error)
-if "%os%"=="8.1" ( goto :EnableDWM81 ) else ( goto :Error)
+if "%os%"=="10" goto :EnableDWM10
+if "%os%"=="8.1" goto :EnableDWM81
 
 :DisableDWM10
 cls
@@ -140,10 +140,15 @@ if exist %systemroot%\System32\dwm.exe.old if exist %systemroot%\System32\dwm.ex
 echo N| copy/-Y "%systemroot%\System32\rundll32.exe" "%systemroot%\System32\dwm.exe"
 taskkill /F /IM dwm.exe
 taskkill /F /IM explorer.exe
-start "" "%systemroot%\explorer.exe"
+cls
+echo DWM has been disabled successfully. Once a black screen appears, spam the (Tab might be needed) Enter button on your keyboard for 2-5 times to access Windows %os%.
+echo Recommended to install Open-Shell.
+pause
+logoff
 goto :EOF
 
 :EnableDWM10
+cls
 :: Revert to original
 if not exist %systemroot%\ImmersiveControlPanel if exist %systemroot%\ImmersiveControlPanel.old ren %systemroot%\ImmersiveControlPanel.old ImmersiveControlPanel
 if exist %systemroot%\ImmersiveControlPanel if exist %systemroot%\ImmersiveControlPanel.old rmdir /S /Q %systemroot%\ImmersiveControlPanel.old
@@ -177,6 +182,7 @@ logoff
 goto :EOF
 
 :EnableDWM81
+cls
 if not exist %systemroot%\ImmersiveControlPanel if exist %systemroot%\ImmersiveControlPanel.old ren %systemroot%\ImmersiveControlPanel.old ImmersiveControlPanel
 if exist %systemroot%\ImmersiveControlPanel if exist %systemroot%\ImmersiveControlPanel.old rmdir /S /Q %systemroot%\ImmersiveControlPanel.old
 if not exist %systemroot%\System32\UIRibbon.dll if exist %systemroot%\System32\UIRibbon.dll.old ren %systemroot%\System32\UIRibbon.dll.old UIRibbon.dll
